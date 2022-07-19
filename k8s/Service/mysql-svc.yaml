@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: db
-    ver: 5.6
+    ver: "5.6"
   type: ClusterIP
   ports:
     - port: 3306
