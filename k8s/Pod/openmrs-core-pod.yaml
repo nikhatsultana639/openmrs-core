@@ -8,7 +8,7 @@ metadata:
   name: openmrscore
 spec:
   containers:
-    - image: shaikkhajaibrahim/openmrs-core:2.4.0
+    - image: openmrs-core:2
       name: openmrs
       ports:
         - containerPort: 8080
