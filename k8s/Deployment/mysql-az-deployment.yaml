@@ -42,11 +42,11 @@ spec:
             - name: MYSQL_DATABASE
               value: openmrs
             - name: MYSQL_USER
-              value: directdevops
+              value: nikhat
             - name: MYSQL_PASSWORD
-              value: directdevops
+              value: rootroot
             - name: MYSQL_ROOT_PASSWORD
-              value: password
+              value: rootroot
       volumes:
         - name: mysql-vol
           persistentVolumeClaim: 
