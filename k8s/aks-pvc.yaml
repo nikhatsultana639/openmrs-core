@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azure-managed-disk
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: managed-premium
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysqldb
+spec:
+  containers:
+    - name: mysqldb
+      image: mysql:8
+      ports:
+        - containerPort: 3306
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: rootroot
+        - name: MYSQL_DATABASE
+          value: spc
+        - name: MYSQL_USER
+          value: nikhat
+        - name: MYSQL_PASSWORD
+          value: rootroot
+      volumeMounts:
+        - name: databasevol
+          mountPath: /var/lib/mysql
+  volumes:
+    - name: databasevol
+      persistentVolumeClaim:
+        claimName: azure-managed-disk
