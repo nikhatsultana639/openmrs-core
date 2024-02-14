@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://ntestacr.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_7943fda8fbbf4f109e321100bc1ea3d7 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_1c5498c49ed84d64b8cc2b6e58eaed17 }}
+        username: ${{ secrets.ACR_USRNAME }}
+        password: ${{ secrets.ACR_PWD }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ntestacr.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_7943fda8fbbf4f109e321100bc1ea3d7 }}/ntest-acr-image:${{ github.sha }}
+        tags: ntestacr.azurecr.io/${{ secrets.ACR_USRNAME }}/ntest-acr-image:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'ntest-as'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_5622ac600e834cc2b20f978b2a738c14 }}
-        images: 'ntestacr.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_7943fda8fbbf4f109e321100bc1ea3d7 }}/ntest-acr-image:${{ github.sha }}'
+        images: 'ntestacr.azurecr.io/${{ secrets.ACR_USRNAME }}/ntest-acr-image:${{ github.sha }}'
